@@ -125,7 +125,7 @@ def predict():
         plt.ioff()  # 关闭交互模式
         fig, ax = plt.subplots(figsize=(10, 5))
         shap.plots.waterfall(shap_values, show=False)
-        plt.savefig("waterfall_plot.png", bbox_inches='tight', dpi=400)
+        # plt.savefig("waterfall_plot.png", bbox_inches='tight', dpi=400)
         # 将图像转换为 base64 格式
         img = io.BytesIO()
         plt.savefig(img, format='png', bbox_inches='tight')
@@ -138,7 +138,7 @@ def predict():
         fig, ax = plt.subplots(figsize=(10, 5))
         shap.force_plot(explainer.expected_value, shap_values.values, input_data, text_rotation=15, show=False,
                         matplotlib=True)
-        plt.savefig("force_plot.png", bbox_inches='tight', dpi=400)
+        # plt.savefig("force_plot.png", bbox_inches='tight', dpi=400)
         # 将图像转换为 base64 格式
         img = io.BytesIO()
         plt.savefig(img, format='png', bbox_inches='tight')
@@ -151,5 +151,7 @@ def predict():
         {'prediction': prediction.tolist(), 'prediction_proba': round(prediction_proba * 100, 2), 'plot': plot_url,
          'force_plot': force_plot_url})
 
+# if __name__ == '__main__':
+#     app.run(debug=True)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
